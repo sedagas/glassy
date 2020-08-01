@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments/fragments :: header"></div>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <nav th:replace="fragments/fragments :: navigation"></nav>
+
+    <aside  class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/dashboard" class="brand-link">
+            <img src="/dist/img/ksLogo.png" alt="Kosova Saat Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">Kosova Saat</span>
+        </a>
+        <nav th:replace="fragments/fragments  :: sidebar"></nav>
+    </aside>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 th:text="${customer.customerName}"></h1>
+
+                        <a class="btn btn-success" th:href="@{/newOrder/{id}(id=${customer.id})}" >
+                            <i class="ion ion-list"></i>
+                            + Create New Order
+                        </a>
+                        <a class="btn btn-success" th:href="@{/newPrescription/{id}(id=${customer.id})}" >
+                            <i class="ion ion-list"></i>
+                            + Create New Prescription
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">All Orders</h3>
+
+                                <div class="card-tools">
+                                 <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                 <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="ion ion-search-outline"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <p th:if="${orders.empty}"> No Orders yet</p>
+                        <table th:if="${!orders.empty}" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Product</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                            <tr th:each="order : ${orders}">
+                                <td th:text="${order.name}"></td>
+                                <td th:text="${order.date}"></td>
+<!--                                <td th:text="${order.product.productName}"></td>-->
+                                <td>
+                                    <a class="btn btn-primary btn-sm" th:href="@{/pdfReport/{id}(id=${order.id})}" target="_blank"><i class="fas fa-file-pdf"></i></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
+    </div>
+</div>
+
+
+
+</body>
+<div th:insert="fragments/fragments :: footer"></div>
+</html>

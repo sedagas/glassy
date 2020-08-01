@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments/fragments :: header"></div>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <nav th:replace="fragments/fragments :: navigation"></nav>
+
+    <aside  class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/dashboard" class="brand-link">
+            <img src="/dist/img/ksLogo.png" alt="Kosova Saat Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">Kosova Saat</span>
+        </a>
+        <nav th:replace="fragments/fragments  :: sidebar"></nav>
+    </aside>
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Product Details</h3>
+                    </div>
+                    <form role="form" action="#" th:action="@{/updateProduct/{id}(id=${product.productId})}" th:object="${product}" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="productName">Name</label>
+                                <input type="text" th:field="*{productName}" class="form-control" id="productName" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="productType">Product Type</label>
+                                <input type="text" th:field="*{productType}" class="form-control" id="productType" placeholder="Prodct Type">
+                            </div>
+                            <div class="form-group">
+                                <label for="productPicPath">Phone Number</label>
+                                <input type="text" th:field="*{productPicPath}"class="form-control" id="productPicPath" placeholder="Pic Path">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit"  class="btn btn-success" value="Save Changes">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:insert="fragments/fragments :: footer"></div>
+</html>

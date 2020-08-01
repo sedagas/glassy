@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments/fragments :: header"></div>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <nav th:replace="fragments/fragments :: navigation"></nav>
+
+    <aside  class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/dashboard" class="brand-link">
+            <img src="/dist/img/ksLogo.png" alt="Kosova Saat Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">Kosova Saat</span>
+        </a>
+        <nav th:replace="fragments/fragments  :: sidebar"></nav>
+    </aside>
+
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">New Customer</h3>
+                    </div>
+                    <form role="form" action="#" th:action="@{/saveCustomer}" th:object="${customer}" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="customerName">Name</label>
+                                <input th:if="${!#fields.hasErrors('customerSurname')}" type="text" th:field="*{customerName}" class="form-control" id="customerName" placeholder="Name">
+                                <input th:if="${#fields.hasErrors('customerName')}" class="form-control is-invalid" th:errors="*{customerName}" ></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerSurname">Surname</label>
+                                <input th:if="${!#fields.hasErrors('customerSurname')}" type="text" th:field="*{customerSurname}" class="form-control" id="customerSurname" placeholder="Surname">
+                                <input th:if="${#fields.hasErrors('customerSurname')}" class="form-control is-invalid" th:errors="*{customerSurname}"></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneNumber">Phone Number</label>
+                                <input th:if="${!#fields.hasErrors('customerSurname')}" type="text" th:field="*{phoneNumber}"class="form-control" id="phoneNumber" placeholder="Phone Number">
+                                <input th:if="${#fields.hasErrors('phoneNumber')}" class="form-control is-invalid" th:errors="*{phoneNumber}"></input>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit"  class="btn btn-success" value="Add Customer">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:insert="fragments/fragments :: footer"></div>
+</html>

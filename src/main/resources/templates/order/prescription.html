@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments/fragments :: header"></div>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <nav th:replace="fragments/fragments :: navigation"></nav>
+
+    <aside  class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/dashboard" class="brand-link">
+            <img src="/dist/img/ksLogo.png" alt="Kosova Saat Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">Kosova Saat</span>
+        </a>
+        <nav th:replace="fragments/fragments  :: sidebar"></nav>
+    </aside>
+
+    <div class="content-wrapper">
+
+        <div class="content-header">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">New Customer</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="#" th:action="@{/savePrescription/{id}(id=${customer.id})}" th:object="${prescription}" method="post">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="name">Prescription Name</label>
+
+                                <div class="col-sm-10">
+                                    <input class="form-control"  type="text" th:value="*{name}" id="name" placeholder="Name">
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="productId">Product</label>
+                                <div class="col-sm-10">
+                                    <select class="custom-select" name="productId" id="productId">
+                                        <option>Select the Product</option>
+                                        <option th:each="product : ${products}" th:value="${product.productId}" th:text="${product.productName}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-4">
+                                    <label for="type">Glass Type</label>
+                                    <select class="custom-select" name="glassType" id="glassType">
+                                        <option>Select Glass Type</option>
+                                        <option id="type" name="glassType" th:each="glassType : ${T(com.sgass.glassy.Model.GlassType).values()}"
+                                        th:value="${glassType}" th:text="${glassType.displayValue}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="lensId">Lens</label>
+                                    <select class="custom-select" name="lens" id="lens">
+                                        <option>Select the Lens</option>
+                                        <option id="lensId" name="lens" th:each="lens : ${T(com.sgass.glassy.Model.Lens).values()}"
+                                        th:value="${lens}" th:text="${lens.displayValue}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="index">Glass Index</label>
+                                    <select class="custom-select" name="glassIndex" id="glassIndex">
+                                        <option>Select Glass Index</option>
+                                        <option id="index"  name="glassIndex" th:each="glassIndex : ${T(com.sgass.glassy.Model.GlassIndex).values()}"
+                                        th:value="${glassIndex}" th:text="${glassIndex.displayValue}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-2 mt-3">
+                                    <label>Right Eye - OD</label>
+                                </div>
+<!--                                <div class="row col-sm-10 ">-->
+                                    <div class="col-sm-2 mr-3">
+                                        <label for="odSphere">Sphere</label>
+                                        <select class="custom-select" name="odSphere" id="odSphere">
+                                            <option>None</option>
+                                            <!--                                        <option th:field="${prescriptionData.odSphere}"></option>-->
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 mr-3">
+                                        <label for="odCylinder">Cylinder</label>
+                                        <select class="custom-select" name="odCylinder" id="odCylinder">
+                                            <option>None</option>
+                                        </select>
+                                        <!--                                    <input th:field="${prescriptionData.odCylinder}"name="odCylinder" id="odCylinder"/>-->
+                                    </div>
+                                    <div class="col-sm-2 mr-3">
+                                        <label for="odAxis">Axis</label>
+                                        <select class="custom-select" name="odAxis" id="odAxis">
+                                            <option>None</option>
+                                            <!--                                        <option th:field="${prescriptionData.odAxis}"></option>-->
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="odAdd">Add</label>
+                                        <select class="custom-select" name="odAdd" id="odAdd">
+                                            <option>None</option>
+                                            <!--                                        <option th:field="${prescriptionData.odAdd}"></option>-->
+                                        </select>
+                                    </div>
+<!--                                </div>-->
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-2 mb-2">
+                                    <label >Left Eye - OS</label>
+                                </div>
+                                    <div class="col-sm-2 mr-3">
+<!--                                        <label for="osSphere">Sphere</label>-->
+                                        <select class="custom-select" name="osSphere" id="osSphere">
+                                            <option>None</option>
+                                            <!--                                        <option th:field="${prescriptionData.odSphere}"></option>-->
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 mr-3">
+<!--                                        <label for="osCylinder">Cylindir</label>-->
+                                        <select class="custom-select" name="osCylinder" id="osCylinder">
+                                            <option>None</option>
+                                        </select>
+                                        <!--                                    <input th:field="${prescriptionData.odCylinder}"name="odCylinder" id="odCylinder"/>-->
+                                    </div>
+                                    <div class="col-sm-2 mr-3">
+<!--                                        <label for="odAxis">Axis</label>-->
+                                        <select class="custom-select" name="osAxis" id="osAxis">
+                                            <option>None</option>
+                                            <!--                                        <option th:field="${prescriptionData.odAxis}"></option>-->
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+<!--                                        <label for="osAdd">Add</label>-->
+                                        <select class="custom-select" name="osAdd" id="osAdd">
+                                            <option>None</option>
+                                            <!--                                        <option th:field="${prescriptionData.odAdd}"></option>-->
+                                        </select>
+                                    </div>
+                                </div>
+
+<!--                            <br/>-->
+<!--                            <div id="os">-->
+<!--                                <label for="osSphere">Sphere</label>-->
+<!--                                <input th:field="${prescriptionData.osSphere}"name="osSphere" id="osSphere"/>-->
+<!--                                <label for="osCylinder">Cylindir</label>-->
+<!--                                <input th:field="${prescriptionData.osCylinder}"name="osCylinder" id="osCylinder"/>-->
+<!--                                <label for="osAxis">Axis</label>-->
+<!--                                <input th:field="${prescriptionData.osAxis}"name="osAxis" id="osAxis"/>-->
+<!--                                <label for="osAdd">Add</label>-->
+<!--                                <input th:field="${prescriptionData.osAdd}"name="osAdd" id="osAdd"/>-->
+<!--                            </div>-->
+                            <div class="form-group row">
+                                <label class="col-sm-2" for="pd">DP</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" th:field="${prescriptionData.pd}"name="pd" id="pd"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="form-group row col-sm-4 mr-2">
+                                    <label for="date">Date</label>
+                                    <input class="form-control" type="text" th:field="*{date}" id="date" placeholder="Date">
+                                </div>
+                                <div class="form-group row col-sm-4  mr-2">
+                                    <label for="price">Price</label>
+                                    <input class="form-control" type="text" th:field="*{price}" id="price" placeholder="Price">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-success" type="submit" id="submitButton" th:value="Save">
+                            </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:insert="fragments/fragments :: footer"></div>
+</html>
